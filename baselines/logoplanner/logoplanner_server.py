@@ -13,6 +13,7 @@ from PIL import Image, ImageDraw, ImageFont
 import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument("--port",type=int,default=8888)
+parser.add_argument("--host",type=str,default="127.0.0.1",help="Host to bind server (use 0.0.0.0 for all interfaces)")
 parser.add_argument("--checkpoint",type=str,default="./logoplanner_policy.ckpt")
 args = parser.parse_known_args()[0]
 
@@ -126,4 +127,4 @@ def logoplanner_step_nogoal():
                     'all_values': all_values.tolist()})
 
 if __name__ == "__main__":
-    app.run(host='127.0.0.1',port=args.port)
+    app.run(host=args.host,port=args.port)
