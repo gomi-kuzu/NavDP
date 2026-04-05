@@ -1,4 +1,5 @@
 def plot_trajectory(global_planed_traj, x_history, u_history, traj_name='real'):
+    import numpy as np
     import matplotlib
     matplotlib.use('Agg') 
     import matplotlib.pyplot as plt

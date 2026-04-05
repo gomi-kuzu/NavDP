@@ -13,6 +13,7 @@ from deployment.visualization import plot_trajectory
 import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument("--port",type=int,default=8888)
+parser.add_argument("--host",type=str,default="0.0.0.0",help="Host to bind server (0.0.0.0 for all interfaces)")
 parser.add_argument("--checkpoint",type=str,default="./logoplanner_policy.ckpt")
 args = parser.parse_known_args()[0]
 
@@ -70,7 +71,8 @@ def navdp_step_xy():
     
     image = Image.open(image_file.stream)
     image = image.convert('RGB')
-    image = np.asarray(image)
+    image = np.array(image)
+    image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
     image = image.reshape((batch_size, -1, image.shape[1], 3))
     
     depth = Image.open(depth_file.stream)
@@ -146,4 +148,4 @@ def navdp_step_xy():
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0',port=args.port)
+    app.run(host=args.host,port=args.port)
